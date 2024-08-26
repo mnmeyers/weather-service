@@ -80,9 +80,20 @@ func (s *ServiceImpl) GetWeather(ctx context.Context, lat, lon float64) (string,
 
 	// Step 3: Get the short forecast for the current period
 	if len(forecast.Properties.Periods) > 0 {
-		return forecast.Properties.Periods[0].ShortForecast, nil
+		currForecast := forecast.Properties.Periods[0]
+		forecastWithCharacterization := fmt.Sprintf("%s and %s", currForecast.ShortForecast, getWeatherCharacterization(currForecast.Temperature))
+		return forecastWithCharacterization, nil
 	}
 
 	fmt.Print("no forecast data available")
 	return "", fmt.Errorf("no forecast data available")
+}
+
+func getWeatherCharacterization(temp int) string {
+	if temp > 90 {
+		return "hot"
+	} else if temp < 40 {
+		return "cold"
+	}
+	return "moderate"
 }

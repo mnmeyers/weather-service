@@ -59,3 +59,43 @@ func TestServiceImpl_GetWeather(t *testing.T) {
 		})
 	}
 }
+
+func Test_getWeatherCharacterization(t *testing.T) {
+	type args struct {
+		temp int
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "hot temperature",
+			args: args{
+				temp: 95,
+			},
+			want: "hot",
+		},
+		{
+			name: "cold temperature",
+			args: args{
+				temp: 35,
+			},
+			want: "cold",
+		},
+		{
+			name: "moderate temperature",
+			args: args{
+				temp: 60,
+			},
+			want: "moderate",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := getWeatherCharacterization(tt.args.temp); got != tt.want {
+				t.Errorf("getWeatherCharacterization() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
