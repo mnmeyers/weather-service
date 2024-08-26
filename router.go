@@ -31,7 +31,7 @@ func makeRouter() (*chi.Mux, *cors.Cors) {
 	router.Use(middleware.Recoverer)
 
 	router.Route("/", func(innerRouter chi.Router) {
-		innerRouter.Get("/weather/{lat}/{lon}", controller.GetWeather)
+		innerRouter.Get("/weather", controller.GetWeather)
 	})
 
 	return router, c

@@ -52,7 +52,7 @@ Run the project using the following command:
 ```
 This will start the project and make it available at port 8080.
 
-Navigate to `http://localhost:8080/weather/37.7749/-122.4194` in your browser to see the current weather in San Francisco, CA.
+Navigate to `http://localhost:8080/weather?lat=37.7749&lon=-122.4194` in your browser to see the current weather in San Francisco, CA.
 
 Testing the Project
 ---------------------

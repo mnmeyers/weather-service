@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/go-chi/chi"
 	"net/http"
 	"strconv"
 )
@@ -24,12 +23,14 @@ func GetController() Controller {
 }
 
 func (controller *ControllerImpl) GetWeather(w http.ResponseWriter, r *http.Request) {
-	lat, err := strconv.ParseFloat(chi.URLParam(r, "lat"), 64)
+	latStr := r.URL.Query().Get("lat")
+	lat, err := strconv.ParseFloat(latStr, 64)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	lon, err := strconv.ParseFloat(chi.URLParam(r, "lon"), 64)
+	lonStr := r.URL.Query().Get("lon")
+	lon, err := strconv.ParseFloat(lonStr, 64)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
